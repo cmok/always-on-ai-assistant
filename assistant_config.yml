@@ -10,5 +10,5 @@ base_assistant:
   human_companion_name: Casper
   ears: realtime-stt
   brain: ollama:llama3.1:latest # deepseek-v3, ollama:phi4, ollama:<any installed model>
-  voice: local # local, elevenlabs
-  elevenlabs_voice: WejK3H1m7MI9CHnIjW9K
+  voice: elevenlabs # local, elevenlabs
+  elevenlabs_voice: Xb7hH8MSUJpSbSDYk0k2 # Alice
