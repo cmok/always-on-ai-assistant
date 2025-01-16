@@ -36,14 +36,20 @@ def chat():
     def process_text(text):
         """Process user speech input"""
         try:
-
+            # Clean the text by removing symbols and whitespace from start/end
+            text = text.strip().strip('.,!?;:"\'-')
+            
             assistant_name = get_config("base_assistant.assistant_name")
             if assistant_name.lower() not in text.lower():
                 logger.info(f"🤖 Not {assistant_name} - ignoring")
                 return
 
-            # Check for exit commands
-            if text.lower() in ["exit", "quit"]:
+            # Split text into words and find the word after assistant name
+            words = text.lower().split()
+            assistant_index = next(i for i, word in enumerate(words) if assistant_name.lower() in word)
+            
+            # Check if there's a next word and if it's an exit command
+            if len(words) > assistant_index + 1 and words[assistant_index + 1] in ["exit", "quit"]:
                 logger.info("👋 Exiting chat session")
                 return False
 

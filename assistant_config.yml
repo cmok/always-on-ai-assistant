@@ -4,7 +4,7 @@ typer_assistant:
   ears: realtime-stt
   brain: deepseek-v3 # only deepseek-v3
   voice: elevenlabs # local, elevenlabs
-  elevenlabs_voice: WejK3H1m7MI9CHnIjW9K
+  elevenlabs_voice: Xb7hH8MSUJpSbSDYk0k2 # Alice
 base_assistant:
   assistant_name: Ada
   human_companion_name: Casper
