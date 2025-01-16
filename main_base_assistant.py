@@ -33,6 +33,9 @@ def chat():
         print_transcription_time=True,
     )
 
+    # Add flag at the start of the chat() function
+    should_exit = False
+
     def process_text(text):
         """Process user speech input"""
         try:
@@ -51,7 +54,10 @@ def chat():
             # Check if there's a next word and if it's an exit command
             if len(words) > assistant_index + 1 and words[assistant_index + 1] in ["exit", "quit"]:
                 logger.info("👋 Exiting chat session")
-                return False
+                nonlocal should_exit
+                should_exit = True
+                recorder.abort()
+                return
 
             # Process input and get response
             recorder.stop()
@@ -59,15 +65,13 @@ def chat():
             logger.info(f"🤖 Response: {response}")
             recorder.start()
 
-            return True
-
         except Exception as e:
             logger.error(f"❌ Error occurred: {str(e)}")
             raise
 
     try:
         print("🎤 Speak now... (say 'exit' or 'quit' to end)")
-        while True:
+        while not should_exit:
             recorder.text(process_text)
 
     except KeyboardInterrupt:
